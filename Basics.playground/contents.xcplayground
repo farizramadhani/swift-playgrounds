@@ -2,6 +2,6 @@
 <playground version='6.0' target-platform='ios' buildActiveScheme='true' importAppTypes='true'>
     <pages>
         <page name='Constant and Variable'/>
-        <page name='Data Types'/>
+        <page name='Basic Data Types'/>
     </pages>
 </playground>
