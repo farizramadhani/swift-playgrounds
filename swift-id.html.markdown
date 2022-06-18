@@ -1,12 +1,4 @@
----
-language: swift
-filename: learnswift-id.swift
-contributors:
-    - ["Fariz Ramadhani", "http://github.com/farizramadhani"]
-lang: id-id
----
-
-Swift adalah bahasa pemrograman untuk pengembangan iOS, macOS, watchOS, dan tvOS yang dibuat oleh Apple. Dirancang untuk hidup berdampingan dengan Objective-C dan menjadi lebih tahan terhadap kode yang salah, Swift diperkenalkan pada tahun 2014 di _Apple's developer donference WWDC_. Dibangun dengan kompiler LLVM yang disertakan dalam Xcode 6+.
+Swift adalah bahasa pemrograman untuk pengembangan iOS, macOS, watchOS, dan tvOS yang dibuat oleh Apple. Dirancang untuk hidup berdampingan dengan Objective-C dan menjadi lebih tahan terhadap kode yang salah, Swift diperkenalkan pada tahun 2014 di Apple's developer conference WWDC. Dibangun dengan kompiler LLVM yang disertakan dalam Xcode 6+.
 
 Buku resmi _[Swift Programming Language](https://itunes.apple.com/us/book/swift-programming-language/id881256329)_ dari Apple sekarang tersedia melalui iBooks. Itu jauh lebih detail daripada panduan ini, dan jika Anda memiliki waktu dan kesabaran untuk membacanya, sangat direkomendasikan. Beberapa contoh di sini berasal dari buku itu.
 
@@ -19,18 +11,18 @@ import Foundation
 // Komentar satu baris diawali dengan //
 // Komentar multi-baris dimulai dengan /* dan diakhiri dengan */
 /* Komentar multi-baris bersarang
- /* TELAH */
+ /* ATAU */
  diizinkan
  */
 
-// Xcode mendukung landmarks untuk memberi anotasi pada kode Anda dan cantuman pada bilah lompat
+// Xcode mendukung landmarks untuk memberi penanda pada kode Anda dan cantuman pada bilah lompat
 // MARK: Tanda bagian
 // MARK: - Tanda bagian dengan garis pemisah
 // TODO: Lakukan sesuatu segera
 // FIXME: Perbaiki kode ini
 
 // MARK: Hello, World
-// Dari Swift 3, untuk mencetak, cukup gunakan metode `print`.
+// Dari Swift 3, untuk mencetak cukup gunakan metode `print`.
 // Secara otomatis menambahkan baris baru.
 print("Hello, world")
 
@@ -62,7 +54,7 @@ print(someVariable)
 
 // Seperti yang Anda lihat di atas, tipe variabel secara otomatis disimpulkan.
 //   Untuk mendeklarasikan tipe secara eksplisit, tulis setelah nama variabel
-//   dipisahkan oleh tanda titik dua.
+//   pisahkan oleh tanda titik dua.
 let aString: String = "A string"
 let aDouble: Double = 0
 
@@ -77,14 +69,14 @@ let descriptionString = "The value of aDouble is \(aDouble)"
 let equation = "Six by nine is \(6 * 9), not 42!"
 // Untuk menghindari keluar dari tanda kutip ganda dan garis miring terbalik, ubah pembatas string
 let explanationString = #"The string I used was "The value of aDouble is \(aDouble)" and the result was \#(descriptionString)"#
-// Anda dapat menempatkan tanda angka sebanyak yang Anda inginkan sebelum kutipan pembukaan,
+// Anda dapat menempatkan tanda angka sebanyak yang Anda inginkan sebelum kutipan pembuka,
 //   cocokkan saja di kutipan akhir. Mereka juga mengubah karakter escape
 //   ke backslash diikuti oleh jumlah tanda angka yang sama.
 
 let multiLineString = """
     Ini adalah string multi-baris.
     Disebut demikian karena membutuhkan banyak baris (wow!)
-        Setiap Indentasi di luar tanda kutip penutup disimpan, sisanya dibuang.
+        Setiap indentasi di luar tanda kutip penutup disimpan, sisanya dibuang.
     Anda dapat memasukkan " or "" dalam string multi-baris karena pembatasnya adalah tiga "s.
     """
 
@@ -95,7 +87,7 @@ let secondElement = shoppingList[1] // Array mulai dari indeks 0
 // Array yang dideklarasikan dengan let tidak dapat diubah; baris berikut memunculkan kesalahan waktu kompilasi
 //shoppingList[2] = "mango"
 
-// Array adalah struct (lebih lanjut tentang itu nanti), jadi ini membuat salinan alih-alih mereferensikan objek yang sama
+// Array adalah struct (lebih lanjut tentang itu nanti), ini membuat salinan dari pada mereferensikan objek yang sama
 var mutableShoppingList = shoppingList
 mutableShoppingList[2] = "mango"
 
@@ -192,69 +184,69 @@ if someOptionalString != nil {
 let empty = someOptionalString?.isEmpty // Bool?
 
 // if-let structure -
-// if-let is a special structure in Swift that allows you to check
-//   if an Optional rhs holds a value, and if it does unwrap
-//   and assign it to the lhs.
+// if-let adalah struktur khusus di Swift yang memungkinkan Anda untuk memeriksa
+//   jika rhs Opsional memiliki nilai, dan jika itu unwrap
+//   dan menetapkan ke lhs.
 if let someNonOptionalStringConstant = someOptionalString {
-    // has `Some` value, non-nil
-    // someOptionalStringConstant is of type String, not type String?
+    // memiliki `Suatu` nilai, non-nil
+    // someOptionalStringConstant adalah tipe String, bukan tipe String?
     if !someNonOptionalStringConstant.hasPrefix("ok") {
-        // does not have the prefix
+        // tidak memiliki awalan
     }
 }
 
-//if-var is allowed too!
+//if-var diperbolehkan juga!
 if var someNonOptionalString = someOptionalString {
     someNonOptionalString = "Non optional AND mutable"
     print(someNonOptionalString)
 }
 
-// You can bind multiple optional values in one if-let statement.
-//   If any of the bound values are nil, the if statement does not execute.
+// Anda dapat mengikat beberapa nilai opsional dalam satu pernyataan if-let.
+//   Jika salah satu nilai terikat adalah nil, pernyataan if tidak dijalankan.
 if let first = someOptionalString, let second = someOptionalString2,
     let third = someOptionalString3, let fourth = someOptionalString4 {
     print("\(first), \(second), \(third), and \(fourth) are all not nil")
 }
 
-//if-let supports "," (comma) clauses, which can be used to
-//   enforce conditions on newly-bound optional values.
-// Both the assignment and the "," clause must pass.
+//if-let mendukung "," (koma) klausa, yang digunakan untuk
+//   melaksanakan kondisi pada nilai opsional yang baru terikat.
+// Baik penugasan maupun klausa "," harus lewat.
 let someNumber: Int? = 7
 if let num = someNumber, num > 3 {
     print("num is not nil and is greater than 3")
 }
 
-// Implicitly unwrapped optional — An optional value that doesn't need to be unwrapped
+// Implicitly unwrapped optional — Nilai opsional yang tidak perlu dibuka
 let unwrappedString: String! = "Value is expected."
 
-// Here's the difference:
-let forcedString = someOptionalString! // requires an exclamation mark
-let implicitString = unwrappedString // doesn't require an exclamation mark
+// Inilah perbedaannya:
+let forcedString = someOptionalString! // butuh tanda seru
+let implicitString = unwrappedString // tidak memerlukan tanda seru
 
 /*
- You can think of an implicitly unwrapped optional as giving permission
- for the optional to be unwrapped automatically whenever it's used.
- Rather than placing an exclamation mark after the optional's name each time you use it,
- you place an exclamation mark after the optional's type when you declare it.
+ Anda dapat menganggap opsional yang tidak terbungkus secara implisit sebagai memberikan izin
+ untuk opsional terbuka secara otomatis setiap kali digunakan.
+ Daripada menempatkan tanda seru setelah nama opsional setiap kali Anda menggunakannya,
+ Anda menempatkan tanda seru setelah tipe opsional ketika Anda mendeklarasikannya.
  */
 
-// Otherwise, you can treat an implicitly unwrapped optional the same way the you treat a normal optional
-//   (i.e., if-let, != nil, etc.)
+// Jika tidak, Anda dapat memperlakukan opsional yang tidak dibungkus secara implisit dengan cara yang sama seperti Anda memperlakukan opsional normal
+//   (yaitu, if-let, != nil, dll.)
 
-// Pre-Swift 5, T! was shorthand for ImplicitlyUnwrappedOptional<T>
-// Swift 5 and later, using ImplicitlyUnwrappedOptional throws a compile-time error.
-//var unwrappedString2: ImplicitlyUnwrappedOptional<String> = "Value is expected." //error
+// Pra-Swift 5, T! adalah kependekan dari ImplicitlyUnwrappedOptional<T>
+// Swift 5 dan nantinya, menggunakan ImplicitlyUnwrappedOptional untuk melempar kesalahan waktu compile.
+//var unwrappedString2: ImplicitlyUnwrappedOptional<String> = "Value is expected." // error
 
-// The nil-coalescing operator ?? unwraps an optional if it contains a non-nil value, or returns a default value.
+// Operator nil-coalescing ?? membuka bungkusan opsional jika mengandung nilai non-nil, atau mengembalikan nilai default.
 someOptionalString = nil
 let someString = someOptionalString ?? "abc"
 print(someString) // abc
-// a ?? b is shorthand for a != nil ? a! : b
+// a ?? b kependekan dari a != nil ? a! : b
 
 // MARK: - Control Flow
 
 let condition = true
-if condition { print("condition is true") } // can't omit the braces
+if condition { print("condition is true") } // tidak bisa menghilangkan braces
 
 if theAnswer > 50 {
     print("theAnswer > 50")
