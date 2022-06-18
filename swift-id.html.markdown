@@ -1,7 +1,7 @@
 ---
-bahasa: swift
+language: swift
 filename: learnswift-id.swift
-kontributor:
+contributors:
     - ["Fariz Ramadhani", "http://github.com/farizramadhani"]
 lang: id-id
 ---
@@ -169,25 +169,25 @@ let someOptionalString3 = String?.some("optional") // sama seperti yang pertama
 let someOptionalString4 = String?.none // nil
 
 /*
- To access the value of an optional that has a value, use the postfix
- operator !, which force-unwraps it. Force-unwrapping is like saying, "I
- know that this optional definitely has a value, please give it to me."
+ Untuk mengakses nilai opsional yang memiliki nilai, gunakan postfix
+ operator !, untuk force-unwrap/pembukaan paksa. Pembukaan paksa seperti mengatakan, 
+ "Saya tahu bahwa opsional ini pasti memiliki nilai, tolong berikan kepada saya."
 
- Trying to use ! to access a non-existent optional value triggers a
- runtime error. Always make sure that an optional contains a non-nil
- value before using ! to force-unwrap its value.
+ Mencoba menggunakan ! untuk mengakses nilai opsional yang tidak ada memicu
+ runtime error. Selalu pastikan bahwa opsional berisi non-nil 
+ nilai sebelum menggunakan ! untuk membuka paksa nilainya.
  */
 
 if someOptionalString != nil {
-    // I am not nil
+    // saya bukan nil
     if someOptionalString!.hasPrefix("opt") {
         print("has the prefix")
     }
 }
 
-// Swift supports "optional chaining," which means that you can call functions
-//   or get properties of optional values and they are optionals of the appropriate type.
-// You can even do this multiple times, hence the name "chaining."
+// Swift mendukung "optional chaining," yang berarti Anda dapat memanggil fungsi
+//   atau mendapat properties dengan nilai opsional dan mereka adalah opsional dari jenis yang sesuai.
+// Anda bahkan dapat melakukan ini beberapa kali, oleh karena itu dinamakan "chaining."
 
 let empty = someOptionalString?.isEmpty // Bool?
 
