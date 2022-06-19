@@ -1,252 +1,266 @@
-Swift adalah bahasa pemrograman untuk pengembangan iOS, macOS, watchOS, dan tvOS yang dibuat oleh Apple. Dirancang untuk hidup berdampingan dengan Objective-C dan menjadi lebih tahan terhadap kode yang salah, Swift diperkenalkan pada tahun 2014 di Apple's developer conference WWDC. Dibangun dengan kompiler LLVM yang disertakan dalam Xcode 6+.
+---
+language: swift
+contributors:
+  - ["Grant Timmerman", "http://github.com/grant"]
+  - ["Christopher Bess", "http://github.com/cbess"]
+  - ["Joey Huang", "http://github.com/kamidox"]
+  - ["Anthony Nguyen", "http://github.com/anthonyn60"]
+  - ["Clayton Walker", "https://github.com/cwalk"]
+  - ["Fernando Valverde", "http://visualcosita.xyz"]
+  - ["Alexey Nazaroff", "https://github.com/rogaven"]
+  - ["@Samasaur1", "https://github.com/Samasaur1"]
+filename: learnswift.swift
+---
 
-Buku resmi _[Swift Programming Language](https://itunes.apple.com/us/book/swift-programming-language/id881256329)_ dari Apple sekarang tersedia melalui iBooks. Itu jauh lebih detail daripada panduan ini, dan jika Anda memiliki waktu dan kesabaran untuk membacanya, sangat direkomendasikan. Beberapa contoh di sini berasal dari buku itu.
+Swift is a programming language for iOS and macOS development created by Apple. Designed to coexist with Objective-C and to be more resilient against erroneous code, Swift was introduced in 2014 at Apple's developer conference WWDC. It is built with the LLVM compiler included in Xcode 6+.
 
-Referensi bagus lainnya adalah _About Swift_ di Swift [website](https://docs.swift.org/swift-book/).
+The official _[Swift Programming Language](https://itunes.apple.com/us/book/swift-programming-language/id881256329)_ book from Apple is now available via iBooks. It goes into much more detail than this guide, and if you have the time and patience to read it, it's recommended. Some of these examples are from that book.
+
+Another great reference is _About Swift_ on Swift's [website](https://docs.swift.org/swift-book/).
 
 ```swift
-// import sebuah modul
+// import a module
 import Foundation
 
-// Komentar satu baris diawali dengan //
-// Komentar multi-baris dimulai dengan /* dan diakhiri dengan */
-/* Komentar multi-baris bersarang
- /* ATAU */
- diizinkan
+// Single-line comments are prefixed with //
+// Multi-line comments start with /* and end with */
+/* Nested multiline comments
+ /* ARE */
+ allowed
  */
 
-// Xcode mendukung landmarks untuk memberi penanda pada kode Anda dan cantuman pada bilah lompat
-// MARK: Tanda bagian
-// MARK: - Tanda bagian dengan garis pemisah
-// TODO: Lakukan sesuatu segera
-// FIXME: Perbaiki kode ini
+// Xcode supports landmarks to annotate your code and lists them in the jump bar
+// MARK: Section mark
+// MARK: - Section mark with a separator line
+// TODO: Do something soon
+// FIXME: Fix this code
 
-// MARK: Hello, World
-// Dari Swift 3, untuk mencetak cukup gunakan metode `print`.
-// Secara otomatis menambahkan baris baru.
+//MARK: Hello, World
+// From Swift 3 on, to print, just use the `print` method.
+// It automatically appends a new line.
 print("Hello, world")
 
 //
-// MARK: - Variabel
+// MARK: - Variables
 //
 
 
-// Gunakan `let` untuk mendeklarasikan konstanta dan `var` untuk mendeklarasikan variabel.
+//Use `let` to declare a constant and `var` to declare a variable.
 let theAnswer = 42
 var theQuestion = "What is the Answer?"
 theQuestion = "How many roads must a man walk down?"
 theQuestion = "What is six by nine?"
-// Mencoba untuk menetapkan kembali konstanta menimbulkan kesalahan waktu kompilasi
+// Atttempting to reassign a constant throws a compile-time error
 //theAnswer = 54
 
-// Baik variabel maupun konstanta dapat dideklarasikan sebelum diberi nilai,
-//   tetapi harus diberi tipe nilai sebelum digunakan
+// Both variables and constants can be declared before they are given a value,
+//   but must be given a value before they are used
 let someConstant: Int
 var someVariable: String
-// Baris-Baris ini akan menimbulkan kesalahan:
+// These lines will throw errors:
 //print(someConstant)
 //print(someVariable)
 someConstant = 0
 someVariable = "0"
-// Baris-baris ini sekarang valid:
+// These lines are now valid:
 print(someConstant)
 print(someVariable)
 
-// Seperti yang Anda lihat di atas, tipe variabel secara otomatis disimpulkan.
-//   Untuk mendeklarasikan tipe secara eksplisit, tulis setelah nama variabel
-//   pisahkan oleh tanda titik dua.
+// As you can see above, variable types are automatically inferred.
+//   To explicitly declare the type, write it after the variable name,
+//   separated by a colon.
 let aString: String = "A string"
 let aDouble: Double = 0
 
-// Nilai tidak pernah secara implisit dikonversi ke tipe lain.
-// Secara eksplisit membuat contoh dari tipe yang diinginkan.
+// Values are never implicitly converted to another type.
+// Explicitly make instances of the desired type.
 let stringWithDouble = aString + String(aDouble)
 let intFromDouble = Int(aDouble)
 
-// Untuk string, gunakan interpolasi string
+// For strings, use string interpolation
 let descriptionString = "The value of aDouble is \(aDouble)"
-// Anda dapat menempatkan ekspresi apa pun di dalam interpolasi string.
+// You can put any expression inside string interpolation.
 let equation = "Six by nine is \(6 * 9), not 42!"
-// Untuk menghindari keluar dari tanda kutip ganda dan garis miring terbalik, ubah pembatas string
+// To avoid escaping double quotes and backslashes, change the string delimiter
 let explanationString = #"The string I used was "The value of aDouble is \(aDouble)" and the result was \#(descriptionString)"#
-// Anda dapat menempatkan tanda angka sebanyak yang Anda inginkan sebelum kutipan pembuka,
-//   cocokkan saja di kutipan akhir. Mereka juga mengubah karakter escape
-//   ke backslash diikuti oleh jumlah tanda angka yang sama.
+// You can put as many number signs as you want before the opening quote,
+//   just match them at the ending quote. They also change the escape character
+//   to a backslash followed by the same number of number signs.
 
 let multiLineString = """
-    Ini adalah string multi-baris.
-    Disebut demikian karena membutuhkan banyak baris (wow!)
-        Setiap indentasi di luar tanda kutip penutup disimpan, sisanya dibuang.
-    Anda dapat memasukkan " or "" dalam string multi-baris karena pembatasnya adalah tiga "s.
+    This is a multi-line string.
+    It's called that because it takes up multiple lines (wow!)
+        Any indentation beyond the closing quotation marks is kept, the rest is discarded.
+    You can include " or "" in multi-line strings because the delimiter is three "s.
     """
 
-// Array
-let shoppingList = ["catfish", "water", "tulips",] // koma diperbolehkan setelah elemen terakhir
-let secondElement = shoppingList[1] // Array mulai dari indeks 0
+// Arrays
+let shoppingList = ["catfish", "water", "tulips",] //commas are allowed after the last element
+let secondElement = shoppingList[1] // Arrays are 0-indexed
 
-// Array yang dideklarasikan dengan let tidak dapat diubah; baris berikut memunculkan kesalahan waktu kompilasi
+// Arrays declared with let are immutable; the following line throws a compile-time error
 //shoppingList[2] = "mango"
 
-// Array adalah struct (lebih lanjut tentang itu nanti), ini membuat salinan dari pada mereferensikan objek yang sama
+// Arrays are structs (more on that later), so this creates a copy instead of referencing the same object
 var mutableShoppingList = shoppingList
 mutableShoppingList[2] = "mango"
 
-// == adalah setara
+// == is equality
 shoppingList == mutableShoppingList // false
 
-// Dictionary yang dideklarasikan dengan let juga tidak dapat diubah
+// Dictionaries declared with let are also immutable
 var occupations = [
     "Malcolm": "Captain",
     "Kaylee": "Mechanic"
 ]
 occupations["Jayne"] = "Public Relations"
-// Dictionary juga struct, jadi ini juga membuat salinan
+// Dictionaries are also structs, so this also creates a copy
 let immutableOccupations = occupations
 
 immutableOccupations == occupations // true
 
-// Array dan Dictionary keduanya secara otomatis tumbuh saat Anda menambahkan elemen
+// Arrays and dictionaries both automatically grow as you add elements
 mutableShoppingList.append("blue paint")
 occupations["Tim"] = "CEO"
 
-// Keduanya dapat disetel kosong
+// They can both be set to empty
 mutableShoppingList = []
 occupations = [:]
 
 let emptyArray = [String]()
-let emptyArray2 = Array<String>() // sama seperti di atas
-// [T] adalah kependekan dari Array<T>
-let emptyArray3: [String] = [] // Mendeklarasikan tipe secara eksplisit memungkinkan Anda untuk mengaturnya ke array kosong
-let emptyArray4: Array<String> = [] // sama seperti di atas
+let emptyArray2 = Array<String>() // same as above
+// [T] is shorthand for Array<T>
+let emptyArray3: [String] = [] // Declaring the type explicitly allows you to set it to an empty array
+let emptyArray4: Array<String> = [] // same as above
 
-// [Key: Value] singkatan dari Dictionary<Key, Value>
+// [Key: Value] is shorthand for Dictionary<Key, Value>
 let emptyDictionary = [String: Double]()
-let emptyDictionary2 = Dictionary<String, Double>() // sama seperti di atas
+let emptyDictionary2 = Dictionary<String, Double>() // same as above
 var emptyMutableDictionary: [String: Double] = [:]
-var explicitEmptyMutableDictionary: Dictionary<String, Double> = [:] // sama seperti di atas
+var explicitEmptyMutableDictionary: Dictionary<String, Double> = [:] // same as above
 
-// MARK: Variabel lainnya
-let øπΩ = "value" // nama variabel unicode
-let 🤯 = "wow" // nama variabel emoji
+// MARK: Other variables
+let øπΩ = "value" // unicode variable names
+let 🤯 = "wow" // emoji variable names
 
-// Keyword dapat digunakan sebagai nama variabel
-// Ini adalah keyword kontekstual yang tidak akan digunakan sekarang, jadi diperbolehkan
+// Keywords can be used as variable names
+// These are contextual keywords that wouldn't be used now, so are allowed
 let convenience = "keyword"
 let weak = "another keyword"
 let override = "another keyword"
 
-// Menggunakan backtick memungkinkan keyword untuk digunakan sebagai nama variabel meskipun tidak diizinkan secara normal
+// Using backticks allows keywords to be used as variable names even if they wouldn't be allowed normally
 let `class` = "keyword"
 
-// MARK: - Opsional
+// MARK: - Optionals
 
 /*
- Opsional adalah fitur bahasa Swift yang berisi nilai,
- atau mengandung nil (tidak ada nilai) untuk menunjukkan bahwa ada nilai yang hilang.
- Nil kira-kira setara dengan `null` dalam bahasa lain.
- Tanda tanya (?) setelah tipe menandai nilai sebagai opsional dari tipe itu.
+ Optionals are a Swift language feature that either contains a value,
+ or contains nil (no value) to indicate that a value is missing.
+ Nil is roughly equivalent to `null` in other languages.
+ A question mark (?) after the type marks the value as optional of that type.
 
- Jika suatu tipe tidak opsional, ini dijamin memiliki nilai.
+ If a type is not optional, it is guaranteed to have a value.
 
- Karena Swift mengharuskan setiap properti memiliki tipe, 
- bahkan nil harus disimpan secara eksplisit sebagai nilai Opsional.
+ Because Swift requires every property to have a type, even nil must be
+ explicitly stored as an Optional value.
 
- Opsional<T> adalah sebuah enum, dengan case .none (nil) dan .some(T) (the value)
+ Optional<T> is an enum, with the cases .none (nil) and .some(T) (the value)
  */
 
-var someOptionalString: String? = "optional" // bisa nil
-// T? adalah kependekan Optional<T> — ? adalah operator postfix (syntax candy)
+var someOptionalString: String? = "optional" // Can be nil
+// T? is shorthand for Optional<T> — ? is a postfix operator (syntax candy)
 let someOptionalString2: Optional<String> = nil
-let someOptionalString3 = String?.some("optional") // sama seperti yang pertama
-let someOptionalString4 = String?.none // nil
+let someOptionalString3 = String?.some("optional") // same as the first one
+let someOptionalString4 = String?.none //nil
 
 /*
- Untuk mengakses nilai opsional yang memiliki nilai, gunakan postfix
- operator !, untuk force-unwrap/pembukaan paksa. Pembukaan paksa seperti mengatakan, 
- "Saya tahu bahwa opsional ini pasti memiliki nilai, tolong berikan kepada saya."
+ To access the value of an optional that has a value, use the postfix
+ operator !, which force-unwraps it. Force-unwrapping is like saying, "I
+ know that this optional definitely has a value, please give it to me."
 
- Mencoba menggunakan ! untuk mengakses nilai opsional yang tidak ada memicu
- runtime error. Selalu pastikan bahwa opsional berisi non-nil 
- nilai sebelum menggunakan ! untuk membuka paksa nilainya.
+ Trying to use ! to access a non-existent optional value triggers a
+ runtime error. Always make sure that an optional contains a non-nil
+ value before using ! to force-unwrap its value.
  */
 
 if someOptionalString != nil {
-    // saya bukan nil
+    // I am not nil
     if someOptionalString!.hasPrefix("opt") {
         print("has the prefix")
     }
 }
 
-// Swift mendukung "optional chaining," yang berarti Anda dapat memanggil fungsi
-//   atau mendapat properties dengan nilai opsional dan mereka adalah opsional dari jenis yang sesuai.
-// Anda bahkan dapat melakukan ini beberapa kali, oleh karena itu dinamakan "chaining."
+// Swift supports "optional chaining," which means that you can call functions
+//   or get properties of optional values and they are optionals of the appropriate type.
+// You can even do this multiple times, hence the name "chaining."
 
 let empty = someOptionalString?.isEmpty // Bool?
 
 // if-let structure -
-// if-let adalah struktur khusus di Swift yang memungkinkan Anda untuk memeriksa
-//   jika rhs Opsional memiliki nilai, dan jika itu unwrap
-//   dan menetapkan ke lhs.
+// if-let is a special structure in Swift that allows you to check
+//   if an Optional rhs holds a value, and if it does unwrap
+//   and assign it to the lhs.
 if let someNonOptionalStringConstant = someOptionalString {
-    // memiliki `Suatu` nilai, non-nil
-    // someOptionalStringConstant adalah tipe String, bukan tipe String?
+    // has `Some` value, non-nil
+    // someOptionalStringConstant is of type String, not type String?
     if !someNonOptionalStringConstant.hasPrefix("ok") {
-        // tidak memiliki awalan
+        // does not have the prefix
     }
 }
 
-//if-var diperbolehkan juga!
+//if-var is allowed too!
 if var someNonOptionalString = someOptionalString {
     someNonOptionalString = "Non optional AND mutable"
     print(someNonOptionalString)
 }
 
-// Anda dapat mengikat beberapa nilai opsional dalam satu pernyataan if-let.
-//   Jika salah satu nilai terikat adalah nil, pernyataan if tidak dijalankan.
+// You can bind multiple optional values in one if-let statement.
+//   If any of the bound values are nil, the if statement does not execute.
 if let first = someOptionalString, let second = someOptionalString2,
     let third = someOptionalString3, let fourth = someOptionalString4 {
     print("\(first), \(second), \(third), and \(fourth) are all not nil")
 }
 
-//if-let mendukung "," (koma) klausa, yang digunakan untuk
-//   melaksanakan kondisi pada nilai opsional yang baru terikat.
-// Baik penugasan maupun klausa "," harus lewat.
+//if-let supports "," (comma) clauses, which can be used to
+//   enforce conditions on newly-bound optional values.
+// Both the assignment and the "," clause must pass.
 let someNumber: Int? = 7
 if let num = someNumber, num > 3 {
     print("num is not nil and is greater than 3")
 }
 
-// Implicitly unwrapped optional — Nilai opsional yang tidak perlu dibuka
+// Implicitly unwrapped optional — An optional value that doesn't need to be unwrapped
 let unwrappedString: String! = "Value is expected."
 
-// Inilah perbedaannya:
-let forcedString = someOptionalString! // butuh tanda seru
-let implicitString = unwrappedString // tidak memerlukan tanda seru
+// Here's the difference:
+let forcedString = someOptionalString! // requires an exclamation mark
+let implicitString = unwrappedString // doesn't require an exclamation mark
 
 /*
- Anda dapat menganggap opsional yang tidak terbungkus secara implisit sebagai memberikan izin
- untuk opsional terbuka secara otomatis setiap kali digunakan.
- Daripada menempatkan tanda seru setelah nama opsional setiap kali Anda menggunakannya,
- Anda menempatkan tanda seru setelah tipe opsional ketika Anda mendeklarasikannya.
+ You can think of an implicitly unwrapped optional as giving permission
+ for the optional to be unwrapped automatically whenever it's used.
+ Rather than placing an exclamation mark after the optional's name each time you use it,
+ you place an exclamation mark after the optional's type when you declare it.
  */
 
-// Jika tidak, Anda dapat memperlakukan opsional yang tidak dibungkus secara implisit dengan cara yang sama seperti Anda memperlakukan opsional normal
-//   (yaitu, if-let, != nil, dll.)
+// Otherwise, you can treat an implicitly unwrapped optional the same way the you treat a normal optional
+//   (i.e., if-let, != nil, etc.)
 
-// Pra-Swift 5, T! adalah kependekan dari ImplicitlyUnwrappedOptional<T>
-// Swift 5 dan nantinya, menggunakan ImplicitlyUnwrappedOptional untuk melempar kesalahan waktu compile.
-//var unwrappedString2: ImplicitlyUnwrappedOptional<String> = "Value is expected." // error
+// Pre-Swift 5, T! was shorthand for ImplicitlyUnwrappedOptional<T>
+// Swift 5 and later, using ImplicitlyUnwrappedOptional throws a compile-time error.
+//var unwrappedString2: ImplicitlyUnwrappedOptional<String> = "Value is expected." //error
 
-// Operator nil-coalescing ?? membuka bungkusan opsional jika mengandung nilai non-nil, atau mengembalikan nilai default.
+// The nil-coalescing operator ?? unwraps an optional if it contains a non-nil value, or returns a default value.
 someOptionalString = nil
 let someString = someOptionalString ?? "abc"
 print(someString) // abc
-// a ?? b kependekan dari a != nil ? a! : b
+// a ?? b is shorthand for a != nil ? a! : b
 
 // MARK: - Control Flow
 
 let condition = true
-if condition { print("condition is true") } // tidak bisa menghilangkan braces
+if condition { print("condition is true") } // can't omit the braces
 
 if theAnswer > 50 {
     print("theAnswer > 50")
